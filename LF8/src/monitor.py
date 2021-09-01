@@ -1,5 +1,4 @@
 import psutil
-import alert
 
 
 def calculateMemory():

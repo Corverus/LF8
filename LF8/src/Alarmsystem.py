@@ -1,26 +1,39 @@
-import os
-from Logging import Logging
+import logging
 
 
 class Alarmsystem:
-    parameter_label: str
-    parameter_value: float
-    soft_limit: float
-    hard_limit: float
-    logging_level = None
+    @staticmethod
+    def examine(
+            parameter_label: str,
+            parameter_value: float,
+            soft_limit: float,
+            hard_limit: float,
+            logging_level: str,
+            logging: logging
+    ):
+        if parameter_value < soft_limit and logging_level == 'debug':
+            # ToDo
+            log_msg = parameter_label + ' = ' + str(parameter_value)
+            Alarmsystem.log('debug', log_msg, logging)
+            return
 
-    def __init__(self, parameter_label, parameter_value, soft_limit, hard_limit, logging_level=None):
-        self.parameter_label = parameter_label
-        self.parameter_value = parameter_value
-        self.soft_limit = soft_limit
-        self.hard_limit = hard_limit
-        self.logging_level = logging_level
+        if parameter_value >= soft_limit:
+            if parameter_value >= hard_limit:
+                log_msg = parameter_label.upper() + ' EXCEEDS SOFT LIMIT OF ' + str(parameter_value) + ': ' \
+                          + parameter_label + ' = ' + str(parameter_value)
+                Alarmsystem.log('warning', log_msg, logging)
+                # ToDo Email versenden
+                return
+            log_msg = parameter_label.upper() + ' EXCEEDS HARD LIMIT OF ' + str(parameter_value) + ': ' \
+                      + parameter_label + ' = ' + str(parameter_value)
+            Alarmsystem.log('warning', log_msg, logging)
+            return
 
-    DEFAULT_PATH: str = os.path.dirname(os.path.abspath(__file__))
-    APP_NAME: str = 'LF8'
-    PATH_TO_LOGFILE = os.path.join(DEFAULT_PATH, APP_NAME + '.log')
-
-    logging = Logging(PATH_TO_LOGFILE, 'debug')
-
-    logging.logger.debug(PATH_TO_LOGFILE)
-    logging.logger.debug('This is a logging test.')
+    @staticmethod
+    def log(logging_level: str, log_msg: str, logger: logging):
+        if logging_level == 'debug':
+            logger.debug(log_msg)
+            return
+        if logging_level == 'warning':
+            logger.warning(log_msg)
+            return

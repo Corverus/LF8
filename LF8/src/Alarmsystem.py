@@ -1,4 +1,5 @@
 import logging
+import socket
 
 
 class Alarmsystem:
@@ -11,20 +12,21 @@ class Alarmsystem:
             logging_level: str,
             logging: logging
     ):
+        device_name: str = socket.gethostname()
         if parameter_value < soft_limit and logging_level == 'debug':
             # ToDo
-            log_msg = parameter_label + ' = ' + str(parameter_value)
+            log_msg = device_name + ': ' + parameter_label + ' = ' + str(parameter_value)
             Alarmsystem.log('debug', log_msg, logging)
             return
 
         if parameter_value >= soft_limit:
             if parameter_value >= hard_limit:
-                log_msg = parameter_label.upper() + ' EXCEEDS HARD LIMIT OF ' + str(parameter_value) + ': ' \
+                log_msg = device_name + ': ' + parameter_label.upper() + ' EXCEEDS HARD LIMIT OF ' + str(parameter_value) + ': ' \
                           + parameter_label + ' = ' + str(parameter_value)
                 Alarmsystem.log('warning', log_msg, logging)
                 # ToDo Email versenden
                 return
-            log_msg = parameter_label.upper() + ' EXCEEDS SOFT LIMIT OF ' + str(parameter_value) + ': ' \
+            log_msg = device_name + ': ' + parameter_label.upper() + ' EXCEEDS SOFT LIMIT OF ' + str(parameter_value) + ': ' \
                       + parameter_label + ' = ' + str(parameter_value)
             Alarmsystem.log('warning', log_msg, logging)
             return

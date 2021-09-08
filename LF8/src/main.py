@@ -9,9 +9,7 @@ def configLog():
     logging.basicConfig(
         format='%(asctime)s - %(levelname)s - %(message)s',
         level=logging.DEBUG,
-        filename=os.path.join('output', 'LF8.log')
+        filename=os.path.join('output', 'LF8.log'),
+        force=True
     )
     return logging.getLogger()
-
-
-Alarmsystem.examine('testparameter', 6, 3, 5, 'debug', configLog())

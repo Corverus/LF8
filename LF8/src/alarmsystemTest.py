@@ -1,7 +1,7 @@
 import unittest
-from LF8.src.monitor import OperatingGrade
-from LF8.src.Alarmsystem import Alarmsystem
-from LF8.src.main import configLog
+from monitor import OperatingGrade
+from Alarmsystem import Alarmsystem
+from main import configLog
 
 USEDMEMORY_SOFT_LIMIT = 70.0
 USEDMEMORY_HARD_LIMIT = 90.0
@@ -11,47 +11,43 @@ alarmSystem = Alarmsystem()
 operatingGrade = OperatingGrade()
 
 
-def searchStringInLogfile(file_name, string_to_search):
-    file_name = 'LF8/src/output/LF8.log'
-    line_number = 0
-    list_of_results = []
-    with open(file_name, 'r') as read_obj:
-        for line in read_obj:
-            line_number += 1
-            if string_to_search in line:
-                list_of_results.append((line_number, line.rstrip()))
-                print(list_of_results)
-                return list_of_results
+def searchStringInLogfile(string_to_search):
+    file_name = 'output/LF8.log'
+    with open(file_name, 'r') as logFile:
+        lines = logFile.readlines()
+        lastMessage = lines[-1]
+        if string_to_search in lastMessage:
+            print(lastMessage)
+            return True
+        else:
+            return False
 
 
-class UsedMemoryTest(unittest.TestCase):
+class UsedMemoryTests(unittest.TestCase):
     def testDebugMode(self):
         alarmSystem.examine('Used Memory', operatingGrade.usedMemory, USEDMEMORY_SOFT_LIMIT, USEDMEMORY_HARD_LIMIT,
                             'debug', configLog())
-        self.assertEqual(searchStringInLogfile('', operatingGrade.usedMemory),
-                         'EXCEEDS SOFT LIMIT OF')
+        assert searchStringInLogfile('USED MEMORY') == True
 
-    @staticmethod
-    def testWarningMode():
+
+    def testWarningMode(self):
         alarmSystem.examine('Used Memory', operatingGrade.usedMemory, USEDMEMORY_SOFT_LIMIT, USEDMEMORY_HARD_LIMIT,
                             'warning', configLog())
-        searchStringInLogfile('', operatingGrade.usedMemory)
+        assert searchStringInLogfile('USED MEMORY') == True
 
 
 class CpuFrequencyTest(unittest.TestCase):
-    @staticmethod
-    def testDebugMode():
+    def testDebugMode(self):
         alarmSystem.examine('CPU Frequency', operatingGrade.cpuFrequency, CPUFREQUENCY_SOFT_LIMIT,
                             CPUFREQUENCY_HARD_LIMIT,
                             'debug', configLog())
-        searchStringInLogfile('', operatingGrade.cpuFrequency)
+        assert searchStringInLogfile('CPU FREQUENCY') == True
 
-    @staticmethod
     def testWaningMode(self):
         alarmSystem.examine('CPU Frequency', operatingGrade.cpuFrequency, CPUFREQUENCY_SOFT_LIMIT,
                             CPUFREQUENCY_HARD_LIMIT,
                             'warning', configLog())
-        searchStringInLogfile('', operatingGrade.cpuFrequency)
+        assert searchStringInLogfile('CPU FREQUENCY') == True
 
 
 if __name__ == '__main__':

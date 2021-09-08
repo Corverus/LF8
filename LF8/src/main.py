@@ -2,7 +2,6 @@
 
 import logging
 import os
-from Alarmsystem import Alarmsystem
 
 
 def configLog():

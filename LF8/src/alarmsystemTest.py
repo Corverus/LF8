@@ -27,13 +27,13 @@ class UsedMemoryTests(unittest.TestCase):
     def testDebugMode(self):
         alarmSystem.examine('Used Memory', operatingGrade.usedMemory, USEDMEMORY_SOFT_LIMIT, USEDMEMORY_HARD_LIMIT,
                             'debug', configLog())
-        assert searchStringInLogfile('USED MEMORY') == True
+        assert searchStringInLogfile('Used Memory') == True
 
 
     def testWarningMode(self):
         alarmSystem.examine('Used Memory', operatingGrade.usedMemory, USEDMEMORY_SOFT_LIMIT, USEDMEMORY_HARD_LIMIT,
                             'warning', configLog())
-        assert searchStringInLogfile('USED MEMORY') == True
+        assert searchStringInLogfile('Used Memory') == True
 
 
 class CpuFrequencyTest(unittest.TestCase):
@@ -41,13 +41,13 @@ class CpuFrequencyTest(unittest.TestCase):
         alarmSystem.examine('CPU Frequency', operatingGrade.cpuFrequency, CPUFREQUENCY_SOFT_LIMIT,
                             CPUFREQUENCY_HARD_LIMIT,
                             'debug', configLog())
-        assert searchStringInLogfile('CPU FREQUENCY') == True
+        assert searchStringInLogfile('CPU Frequency') == True
 
     def testWaningMode(self):
         alarmSystem.examine('CPU Frequency', operatingGrade.cpuFrequency, CPUFREQUENCY_SOFT_LIMIT,
                             CPUFREQUENCY_HARD_LIMIT,
                             'warning', configLog())
-        assert searchStringInLogfile('CPU FREQUENCY') == True
+        assert searchStringInLogfile('CPU Frequency') == True
 
 
 if __name__ == '__main__':

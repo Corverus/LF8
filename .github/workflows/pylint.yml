@@ -4,13 +4,13 @@ on:
   push:
     branches:
       -main
-  schedule:
-    - cron: "*/2 * * * *"
-      displayName: "Daily build at 8 a.m."
-      branches:
-        include:
-          -main
-      always: true
+    schedule:
+      - cron: "*/2 * * * *"
+        displayName: "Daily build at 8 a.m."
+        branches:
+          include:
+            -main
+        always: true
 
 jobs:
   build:

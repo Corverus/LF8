@@ -3,13 +3,13 @@ name: Pylint
 on:
   push:
     branches:
-      -main
+      - main
     schedule:
       - cron: "*/2 * * * *"
-        displayName: "Daily build at 8 a.m."
+        displayName: "Build every 2 min"
         branches:
           include:
-            -main
+            - main
         always: true
 jobs:
   build:

@@ -5,8 +5,8 @@ on:
     branches:
       - main
     schedule:
-      - cron: "*/2 * * * *"
-        displayName: "Build every 2 min"
+      - cron: "* 8 * * *"
+        displayName: "Build daily at 8 a.m."
         branches:
           include:
             - main

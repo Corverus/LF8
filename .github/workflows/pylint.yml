@@ -30,8 +30,8 @@ jobs:
           pip install pylint
 
       #  - name: Analysing the code with pylint
-      #  run: pylint `ls -R|grep .py$|xargs`
+         #  run: pylint `ls -R|grep .py$|xargs`
 
       - name: Automated Testing
-        run: python -m unittest
+        run: python -m unittest discover C:\Users\Corvin Frei\Documents\Schule\LF8\LF8\src\testAlarmsystem.py
 

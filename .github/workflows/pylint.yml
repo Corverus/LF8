@@ -1,9 +1,9 @@
 name: Pylint
 
 on:
-  schedule:
-    -cron: "0 8 * * *"
-      displayName: 'Daily build at 8 a.m.'
+  schedules:
+    - cron: "0 8 * * *"
+      displayName: "Daily build at 8 a.m."
       branches:
         include:
           -main

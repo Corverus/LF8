@@ -35,5 +35,5 @@ jobs:
 
       - name: Automated Testing
         run: |
-          pytest test*
+          pytest src/test*
 

@@ -24,5 +24,5 @@ jobs:
       #  run: pylint `ls -R|grep .py$|xargs`
 
       - name: Automated Testing
-        run: python -m unittest LF8/src/alarmsystemTest.UsedMemoryTests
+        run: python -m unittest C:\Users\Corvin Frei\Documents\Schule\LF8\LF8\src\alarmsystemTest.py
 

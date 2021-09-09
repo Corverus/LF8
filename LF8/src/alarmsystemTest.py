@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 import unittest
 from monitor import OperatingGrade
 from Alarmsystem import Alarmsystem

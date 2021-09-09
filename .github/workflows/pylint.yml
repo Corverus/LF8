@@ -35,5 +35,5 @@ jobs:
 
       - name: Automated Testing
         run: |
-          pytest src/test*
+          pytest src/testAlarmsystem.py
 

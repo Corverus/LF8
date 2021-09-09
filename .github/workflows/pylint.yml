@@ -1,6 +1,13 @@
 name: Pylint
 
-on: [ push ]
+on:
+  schedule:
+    -cron: "0 8 * * *"
+      displayName: 'Daily build at 8 a.m.'
+      branches:
+        include:
+          -main
+      always: true
 
 jobs:
   build:

@@ -3,8 +3,9 @@
 import unittest
 from Alarmsystem import Alarmsystem
 from main import configLog
-FIXCPU = 70.20
-FIXMEMORY = 91.20
+
+FIXMEMORY = 80.20
+FIXCPU = 40.20
 USEDMEMORY_SOFT_LIMIT = 50.0
 USEDMEMORY_HARD_LIMIT = 90.0
 CPUFREQUENCY_SOFT_LIMIT = 50.0
@@ -17,11 +18,10 @@ def searchStringInLogfile(stringToSearch, secondString=None):
     with open(file_name, 'r') as logFile:
         lines = logFile.readlines()
         lastMessage = lines[-1]
+        print(lastMessage)
         if stringToSearch in lastMessage and secondString in lastMessage:
-            print(lastMessage)
             return True
         else:
-            print(lastMessage)
             return False
 
 
@@ -29,12 +29,12 @@ class UsedMemoryTests(unittest.TestCase):
     def testUsedMemoryDebugMode(self):
         alarmSystem.examine('Used Memory', FIXMEMORY, USEDMEMORY_SOFT_LIMIT, USEDMEMORY_HARD_LIMIT,
                             'debug', configLog())
-        assert searchStringInLogfile('Used Memory', 'WARNING') == True
+        assert searchStringInLogfile('WARNING', 'SOFT LIMIT') == True
 
     def testUsedMemoryWarningMode(self):
-        alarmSystem.examine('Used Memory', FIXMEMORY, USEDMEMORY_SOFT_LIMIT, USEDMEMORY_HARD_LIMIT,
+        alarmSystem.examine('Used Memory', FIXMEMORY + 10, USEDMEMORY_SOFT_LIMIT, USEDMEMORY_HARD_LIMIT,
                             'warning', configLog())
-        assert searchStringInLogfile('Used Memory', 'WARNING') == True
+        assert searchStringInLogfile('WARNING', 'HARD LIMIT') == True
 
 
 class CpuFrequencyTests(unittest.TestCase):
@@ -42,13 +42,13 @@ class CpuFrequencyTests(unittest.TestCase):
         alarmSystem.examine('CPU Frequency', FIXCPU, CPUFREQUENCY_SOFT_LIMIT,
                             CPUFREQUENCY_HARD_LIMIT,
                             'debug', configLog())
-        assert searchStringInLogfile('CPU Frequency', 'WARNING') == True
+        assert searchStringInLogfile('DEBUG', 'SOFT LIMIT') == False
 
     def testCpuFrequencyWaningMode(self):
-        alarmSystem.examine('CPU Frequency', FIXCPU, CPUFREQUENCY_SOFT_LIMIT,
+        alarmSystem.examine('CPU Frequency', FIXCPU + 10, CPUFREQUENCY_SOFT_LIMIT,
                             CPUFREQUENCY_HARD_LIMIT,
                             'warning', configLog())
-        assert searchStringInLogfile('CPU Frequency', 'WARNING') == True
+        assert searchStringInLogfile('WARNING', 'SOFT LIMIT') == True
 
 
 if __name__ == '__main__':

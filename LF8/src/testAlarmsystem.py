@@ -4,7 +4,8 @@ import unittest
 from monitor import OperatingGrade
 from Alarmsystem import Alarmsystem
 from main import configLog
-
+FIXCPU = 70.20
+FIXMEMORY = 91.20
 USEDMEMORY_SOFT_LIMIT = 50.0
 USEDMEMORY_HARD_LIMIT = 90.0
 CPUFREQUENCY_SOFT_LIMIT = 50.0
@@ -28,25 +29,25 @@ def searchStringInLogfile(stringToSearch, secondString=None):
 
 class UsedMemoryTests(unittest.TestCase):
     def testUsedMemoryDebugMode(self):
-        alarmSystem.examine('Used Memory', operatingGrade.usedMemory, USEDMEMORY_SOFT_LIMIT, USEDMEMORY_HARD_LIMIT,
+        alarmSystem.examine('Used Memory', FIXMEMORY, USEDMEMORY_SOFT_LIMIT, USEDMEMORY_HARD_LIMIT,
                             'debug', configLog())
-        assert searchStringInLogfile('Used Memory', 'DEBUG') == True
+        assert searchStringInLogfile('Used Memory', 'WARNING') == True
 
     def testUsedMemoryWarningMode(self):
-        alarmSystem.examine('Used Memory', operatingGrade.usedMemory, USEDMEMORY_SOFT_LIMIT, USEDMEMORY_HARD_LIMIT,
+        alarmSystem.examine('Used Memory', FIXMEMORY, USEDMEMORY_SOFT_LIMIT, USEDMEMORY_HARD_LIMIT,
                             'warning', configLog())
-        assert searchStringInLogfile('Used Memory', 'WARNING') == False
+        assert searchStringInLogfile('Used Memory', 'WARNING') == True
 
 
 class CpuFrequencyTests(unittest.TestCase):
     def testCpuFrequencyDebugMode(self):
-        alarmSystem.examine('CPU Frequency', operatingGrade.cpuFrequency, CPUFREQUENCY_SOFT_LIMIT,
+        alarmSystem.examine('CPU Frequency', FIXCPU, CPUFREQUENCY_SOFT_LIMIT,
                             CPUFREQUENCY_HARD_LIMIT,
                             'debug', configLog())
-        assert searchStringInLogfile('CPU Frequency', 'DEBUG') == False
+        assert searchStringInLogfile('CPU Frequency', 'WARNING') == True
 
     def testCpuFrequencyWaningMode(self):
-        alarmSystem.examine('CPU Frequency', operatingGrade.cpuFrequency, CPUFREQUENCY_SOFT_LIMIT,
+        alarmSystem.examine('CPU Frequency', FIXCPU, CPUFREQUENCY_SOFT_LIMIT,
                             CPUFREQUENCY_HARD_LIMIT,
                             'warning', configLog())
         assert searchStringInLogfile('CPU Frequency', 'WARNING') == True

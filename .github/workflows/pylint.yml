@@ -33,6 +33,5 @@ jobs:
 
       - name: Automated Testing
         run: |
-          cd ../
           ls
 

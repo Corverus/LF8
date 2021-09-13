@@ -9,4 +9,4 @@ def plotTimeframe(csv):
     data_df.plot.bar(x = 'datetime', y = 'value')
     plt.show()
 
-plotTimeframe(os.path.join('output','LF8ocupied harddrive space.csv'))
+plotTimeframe(os.path.join('../LF8/src/output', 'LF8ocupied harddrive space.csv'))

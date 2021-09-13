@@ -4,7 +4,7 @@ from datetime import datetime
 import pandas as pd
 
 def fillCSV(parameter_label, parameter_value):
-    filename = os.path.join('output', 'LF8' + parameter_label + '.csv')
+    filename = os.path.join('../LF8/src/output', 'LF8' + parameter_label + '.csv')
     header = ['datetime', 'value']
     now = datetime.now().strftime("%y-%m-%d %H:%M:%S")
     data = [now, parameter_value]

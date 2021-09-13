@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 
 import unittest
-from monitor import OperatingGrade
 from Alarmsystem import Alarmsystem
 from main import configLog
 FIXCPU = 70.20
@@ -11,7 +10,6 @@ USEDMEMORY_HARD_LIMIT = 90.0
 CPUFREQUENCY_SOFT_LIMIT = 50.0
 CPUFREQUENCY_HARD_LIMIT = 90.0
 alarmSystem = Alarmsystem()
-operatingGrade = OperatingGrade()
 
 
 def searchStringInLogfile(stringToSearch, secondString=None):

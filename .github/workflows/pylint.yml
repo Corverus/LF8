@@ -30,6 +30,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install pylint
           pip install pytest
+          pip install psutil
 
       - name: Automated Testing
         run: |

@@ -33,5 +33,6 @@ jobs:
 
       - name: Automated Testing
         run: |
-          pwd
+          cd src
+          py testAlarmsystem.py
 

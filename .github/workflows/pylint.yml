@@ -32,7 +32,7 @@ jobs:
           pip install pytest
 
       - name: Automated Testing
+        working-directory:  ./src
         run: |
-          cd ~
           pwd
 

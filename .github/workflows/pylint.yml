@@ -33,6 +33,6 @@ jobs:
 
       - name: Automated Testing
         run: |
-          cd doku
+          cd ../
           ls
 

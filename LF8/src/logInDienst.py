@@ -9,6 +9,7 @@ class LogInService():
         self.users = list(tlines[0].split('/'))
         self.passwords = list(tlines[1].split('/'))
         rfile.close
+        self.logIn()
 
     def logIn(self):
         user = input('Bitte geben Sie den Username an, in den sie sich einloggen wollen.')
@@ -35,8 +36,4 @@ class LogInService():
         for element in strList:
             output = output + '/' + element
         return(strList[1:])
-        
-    logIn()
 
-
-LogInService()

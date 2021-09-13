@@ -33,5 +33,5 @@ jobs:
 
       - name: Automated Testing
         run: |
-          echo "$PATH"
+          pwd
 

@@ -34,6 +34,5 @@ jobs:
       - name: Automated Testing
         run: |
           cd LF8/src
-          pwd
-          ls
+          pytest testAlarmsystem.py
 

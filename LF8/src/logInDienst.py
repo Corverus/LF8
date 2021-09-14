@@ -29,11 +29,11 @@ class LogInService():
             print('Es existiert bereits ein User mit dem Namen:' + user)
         else:
             self.users.append(user)
-            userString = createString(self.users)
+            userString = self.createString(self.users)
             self.passwords.append(password)
-            passwordString = createString(self.passwords)
+            passwordString = self.createString(self.passwords)
             self.emails.append(email)
-            emailString = createString(self.emails)
+            emailString = self.createString(self.emails)
             wfile = open(self.filename, 'w')
             strings = [userString, passwordString, emailString]
             wfile.writelines(strings)

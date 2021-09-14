@@ -6,21 +6,25 @@ class LogInService():
         rfile = open(self.filename, 'r')
         tlines = rfile.readlines()
         tlines = [line.rstrip() for line in tlines]
-        self.users = list(tlines[0].split('/'))
-        self.passwords = list(tlines[1].split('/'))
+        self.users = list(tlines[0].split('|'))
+        self.passwords = list(tlines[1].split('|'))
+        self.emails = list(tlines[2].split('|'))
         rfile.close
-        self.logIn()
+        if self.logIn():
+            print('Herzlich Willkommen ' + self.users[self.index]) 
+        else:
+            exit()
 
     def logIn(self):
         user = input('Bitte geben Sie den Username an, in den sie sich einloggen wollen.')
         password = input('Bitte geben Sie das Password Ihres Users ein.')
-        index = self.users.index(user)
-        if password == self.passwords[index]:
-            print('Herzlich Willkommen ' + user)
+        self.index = self.users.index(user)
+        if password == self.passwords[self.index]:
+            return(True)
         else:
-            exit()
+            return(False)
 
-    def adduser(self, user, password):
+    def adduser(self, user, password, email):
         if user in self.users:
             print('Es existiert bereits ein User mit dem Namen:' + user)
         else:
@@ -28,12 +32,15 @@ class LogInService():
             userString = createString(self.users)
             self.passwords.append(password)
             passwordString = createString(self.passwords)
+            self.emails.append(email)
+            emailString = createString(self.emails)
             wfile = open(self.filename, 'w')
-            strings = [userString, passwordString]
-            wfile.writelines(strings) 
+            strings = [userString, passwordString, emailString]
+            wfile.writelines(strings)
+            wfile.close
 
     def createString(strList):
         for element in strList:
-            output = output + '/' + element
+            output = output + '|' + element
         return(strList[1:])
 

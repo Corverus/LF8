@@ -5,6 +5,7 @@ import os
 import sys
 import Alarmsystem
 import monitor
+import logInDienst
 
 alarmSystem = Alarmsystem.Alarmsystem
 monitor = monitor.OperatingGrade
@@ -38,5 +39,5 @@ def useArguments():
         print('')
         alarmSystem.examine('Used Memory', monitor().usedMemory, SOFT_LIMIT, HARD_LIMIT, 'debug', configLog())
 
-
+AcountManager = logInDienst.LogInService()
 useArguments()

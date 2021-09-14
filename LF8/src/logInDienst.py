@@ -16,8 +16,8 @@ class LogInService():
             exit()
 
     def logIn(self):
-        user = input('Bitte geben Sie den Username an, in den sie sich einloggen wollen.')
-        password = input('Bitte geben Sie das Password Ihres Users ein.')
+        user = input('Bitte geben Sie den Username an, in den sie sich einloggen wollen. ->')
+        password = input('Bitte geben Sie das Password Ihres Users ein. ->')
         self.index = self.users.index(user)
         if password == self.passwords[self.index]:
             return(True)

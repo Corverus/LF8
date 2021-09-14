@@ -6,6 +6,11 @@ import sys
 import Alarmsystem
 import monitor
 
+alarmSystem = Alarmsystem.Alarmsystem
+monitor = monitor.OperatingGrade
+SOFT_LIMIT = 70
+HARD_LIMIT = 90
+
 
 def configLog():
     logging.basicConfig(
@@ -23,19 +28,15 @@ def useArguments():
         if argument == '-h' or argument == '--help':
             print('-cpu -> CPU-Frequency\n-memory -> utilized Memory')
         elif argument == '-cpu':
-            Alarmsystem.Alarmsystem.examine('CPU Frequency', monitor.OperatingGrade().cpuFrequency, 70, 90,
-                                            'debug', configLog())
+            alarmSystem.examine('CPU Frequency', 90, SOFT_LIMIT, HARD_LIMIT, 'debug', configLog())
         elif argument == '-memory':
-            Alarmsystem.Alarmsystem.examine('Used Memory', monitor.OperatingGrade().usedMemory, 70, 90,
-                                            'debug', configLog())
+            alarmSystem.examine('Used Memory', monitor().usedMemory, SOFT_LIMIT, HARD_LIMIT, 'debug', configLog())
         else:
             print('Wrong Input\nTry -h or --help for more information.')
     else:
-        Alarmsystem.Alarmsystem.examine('CPU Frequency', monitor.OperatingGrade().cpuFrequency, 70, 90,
-                                        'debug', configLog())
+        alarmSystem.examine('CPU Frequency', monitor().cpuFrequency, SOFT_LIMIT, HARD_LIMIT, 'warning', configLog())
         print('')
-        Alarmsystem.Alarmsystem.examine('Used Memory', monitor.OperatingGrade().usedMemory, 70, 90,
-                                        'debug', configLog())
+        alarmSystem.examine('Used Memory', monitor().usedMemory, SOFT_LIMIT, HARD_LIMIT, 'debug', configLog())
 
 
 useArguments()

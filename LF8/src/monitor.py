@@ -2,11 +2,11 @@ import psutil
 
 
 def calculateMemory():
-    return psutil.virtual_memory().used
+    return round(psutil.virtual_memory().used / (psutil.virtual_memory().total / 100), 2)
 
 
 def calculateCPU():
-    return psutil.cpu_freq().current / (psutil.cpu_freq().max / 100)
+    return round(psutil.cpu_freq().current / (psutil.cpu_freq().max / 100), 2)
 
 
 class OperatingGrade:

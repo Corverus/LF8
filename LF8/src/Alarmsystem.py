@@ -1,4 +1,5 @@
 import logging
+import EMailService
 
 
 class Alarmsystem:
@@ -14,6 +15,7 @@ class Alarmsystem:
         if parameter_value < soft_limit and logging_level == 'debug':
             log_msg = parameter_label + ' = ' + str(parameter_value)
             Alarmsystem.log('debug', log_msg, logging)
+            print('debug', log_msg, logging)
             return
 
         if parameter_value >= soft_limit:
@@ -21,11 +23,13 @@ class Alarmsystem:
                 log_msg = parameter_label.upper() + ' EXCEEDS HARD LIMIT OF ' + str(hard_limit) + ': ' \
                           + parameter_label + ' = ' + str(parameter_value)
                 Alarmsystem.log('warning', log_msg, logging)
-                # ToDo Email versenden
+                print('warning', log_msg, logging)
+                EMailService.sendMail(parameter_value)
                 return
             log_msg = parameter_label.upper() + ' EXCEEDS SOFT LIMIT OF ' + str(soft_limit) + ': ' \
                       + parameter_label + ' = ' + str(parameter_value)
             Alarmsystem.log('warning', log_msg, logging)
+            print('warning', log_msg, logging)
             return
 
     @staticmethod

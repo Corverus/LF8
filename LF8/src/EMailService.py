@@ -32,5 +32,5 @@ class EMailDienst:
 def sendMail(value):
     client = EMailDienst('smtp-mail.outlook.com', 'lf8warningtool@outlook.de', 'LF8!Gruppe4')
     body = client.buildBody(value)
-    message = client.buildMessage('lf8warningtool@outlook.de', ['ben.zimmerhh@gmail.com'], 'Warning', body)
-    client.sendEMail('ben.zimmerhh@gmail.com', message)
+    message = client.buildMessage('lf8warningtool@outlook.de', ['lf8warningtool@gmail.com'], 'Warning', body)
+    client.sendEMail('lf8warningtool@gmail.com', message)

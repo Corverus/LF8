@@ -24,7 +24,7 @@ class Alarmsystem:
                           + parameter_label + ' = ' + str(parameter_value)
                 Alarmsystem.log('warning', log_msg, logging)
                 print('warning', log_msg, logging)
-                #EMailService.sendMail(parameter_value) auskommentiert damit ich nicht täglich mails bekomme
+                EMailService.sendMail(parameter_value)
                 return
             log_msg = parameter_label.upper() + ' EXCEEDS SOFT LIMIT OF ' + str(soft_limit) + ': ' \
                       + parameter_label + ' = ' + str(parameter_value)
